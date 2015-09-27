@@ -30,6 +30,23 @@ STATICFILES_DIRS = (
 )
 # ---------------------------------------------------------------------------
 
+# Customize the admin template - https://docs.djangoproject.com/en/1.7/intro/tutorial02/
+TEMPLATES =[
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'diablofarm', 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 ADMINS = [os.environ.get('ADMINS', 'your_email@example.com'), ]
