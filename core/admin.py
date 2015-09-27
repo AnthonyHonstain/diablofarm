@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import FarmGroup, FarmEvent
 
-# Register your models here.
+
+admin.site.register(FarmGroup)
+admin.site.register(FarmEvent)

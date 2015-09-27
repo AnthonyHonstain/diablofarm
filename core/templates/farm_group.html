@@ -1,0 +1,48 @@
+{% extends "diablofarm_base.html" %}
+
+{% block title %}
+DiabloFarm
+{% endblock %}
+
+{% block description %}
+Diablo Farming Tracker
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 well">
+      <h2>{{ farm_group.title }}</h2>
+      <p>Record your individual farming runs</p>
+      {% if farm_events %}
+      <ul class="list-unstyled">
+      {% for farm_event in farm_events %}
+      <li>
+        <table class="table">
+        <tr>
+        <th>Date</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Diff</th>
+        </tr>
+        <tr>
+        <td>{{ farm_event.start_time|date:"SHORT_DATE_FORMAT" }}</td>
+        <td>{{ farm_event.start_time|date:"H:i:s" }}</td>
+        <td>{{ farm_event.end_time|date:"H:i:s" }}</td>
+        <td>{{ farm_event.time_diff|time:"i.s" }}</td>
+        </tr>
+        </table>
+      </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

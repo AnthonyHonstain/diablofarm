@@ -20,14 +20,15 @@ Diablo Farming Tracker
 <div class="container">
   <div class="row">
     <div class="col-md-12 well">
-      <h2>Diablo Farming</h2>
-      <p>Simple tracker for time spent farming.</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 well">
-      <h2>STUB</h2>
-      <h3>STUB</h3>
+      <h2>Farming Groups</h2>
+      <p>Group your farming events together for quick comparrison.</p>
+      {% if farm_groups %}
+      <ul>
+      {% for farm_group in farm_groups %}
+      <li><a href ="{% url 'farm_group' farm_group.id %}">{{ farm_group.title }}</a></li>
+      {% endfor %}
+      </ul>
+      {% endif %}
     </div>
   </div>
 </div>
