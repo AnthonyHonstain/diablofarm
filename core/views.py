@@ -4,7 +4,7 @@ import datetime
 
 
 def index(request):
-    farm_groups = FarmGroup.objects.all()
+    farm_groups = FarmGroup.objects.all().order_by('id')
 
     return render(request, 'index.html', {'farm_groups':farm_groups})
 
