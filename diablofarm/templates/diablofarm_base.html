@@ -17,6 +17,7 @@
     <!-- TODO - NOT NEEDED YET
     <link href="/static/css/bootstrap-table.min.css" rel="stylesheet" >
     -->
+    {% block css %} {% endblock %}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -57,10 +58,12 @@
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/static/js/jquery-1.11.2.min.js"></script>
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/static/js/bootstrap.min.js"></script>
+    <!-- TODO - NOT NEEDED YET
     <script src="/static/js/bootstrap-table.min.js"></script>
+     -->
     {% block script %} {% endblock %}
 
 </body>

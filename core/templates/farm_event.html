@@ -1,0 +1,53 @@
+{% extends "diablofarm_base.html" %}
+
+{% block title %}
+DiabloFarm
+{% endblock %}
+
+{% block description %}
+Diablo Farming Tracker
+{% endblock %}
+
+{% block css %}
+<link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet"></link>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 well">
+      <a href ="{% url 'farm_group' farm_group.id %}">
+      <h2>{{ farm_group.title }}</h2>
+      </a>
+      <p>CRUD Single Event</p>
+
+      {% if farm_event.id %}
+      <form action="{% url 'farm_event' farm_group_id=farm_group.id farm_event_id=farm_event.id %}" method="POST">
+      {% else %}
+      <form action="{% url 'farm_event' farm_group_id=farm_group.id %}" method="POST">
+      {% endif %}
+
+      {% csrf_token %}
+      {{ form.as_table }}
+
+      <button type="submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+$('#datetimepicker_start').datetimepicker({
+  todayBtn: true
+});
+$('#datetimepicker_end').datetimepicker({
+  todayBtn: true
+});
+</script>
+{% endblock %}

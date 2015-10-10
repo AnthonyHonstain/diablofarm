@@ -20,35 +20,45 @@ Diablo Farming Tracker
 
       <li>
         <table class="table">
-        <tr>
-        <th>Date</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Diff</th>
-        <th>DB</th>
-        <th>Legendary</th>
-        <th>Bounty</th>
-        <th>BS</th>
-        <th>Exp</th>
-        </tr>
-        {% for farm_event in farm_events %}
-        <tr>
-        <td>{{ farm_event.start_time|date:"SHORT_DATE_FORMAT" }}</td>
-        <td>{{ farm_event.start_time|date:"H:i:s" }}</td>
-        <td>{{ farm_event.end_time|date:"H:i:s" }}</td>
-        <td>{{ farm_event.time_diff|time:"i.s" }}</td>
+         <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Diff min:sec</th>
+          <th>DB</th>
+          <th>Legendary</th>
+          <th>Bounty</th>
+          <th>BS</th>
+          <th>Exp</th>
+          <th></th>
+         </tr>
+         {% for farm_event in farm_events %}
+         <tr>
+          <td>{{ farm_event.start_time|date:"SHORT_DATE_FORMAT" }}</td>
+          <td>{{ farm_event.start_time|date:"H:i:s" }}</td>
+          <td>{{ farm_event.end_time|date:"H:i:s" }}</td>
+          <td>{{ farm_event.time_diff|time:"i.s" }}</td>
 
-        <td>{{ farm_event.death_breath_count }}</td>
-        <td>{{ farm_event.legendary_count }}</td>
-        <td>{{ farm_event.bounty_count }}</td>
-        <td>{{ farm_event.blood_shard_count }}</td>
-        <td>{{ farm_event.experience_count }}</td>
-        </tr>
+          <td>{{ farm_event.death_breath_count }}</td>
+          <td>{{ farm_event.legendary_count }}</td>
+          <td>{{ farm_event.bounty_count }}</td>
+          <td>{{ farm_event.blood_shard_count }}</td>
+          <td>{{ farm_event.experience_count }}</td>
+          <td>
+            <a href="{% url 'farm_event' farm_group_id=farm_group.id farm_event_id=farm_event.id %}">
+              <button type="button" class="btn btn-default">Edit</button>
+            </a>
+          </td>
+         </tr>
         {% endfor %}
         </table>
       </li>
       </ul>
       {% endif %}
+
+      <a href="{% url 'farm_event' farm_group_id=farm_group.id %}">
+      <button type="button" class="btn btn-default">Add</button>
+      </a>
     </div>
   </div>
 </div>
