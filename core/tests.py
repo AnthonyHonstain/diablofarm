@@ -50,7 +50,7 @@ class CoreFarmGroupTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, farm_group.title)
 
-        # Add an event.
+        # Add an event and check that it dumps out some of the event data.
         farm_event = FarmEvent.objects.create(
             group=farm_group,
             start_time=timezone.now(),
