@@ -23,16 +23,29 @@ Diablo Farming Tracker
       <p>CRUD Single Event</p>
 
       {% if farm_event.id %}
-      <form action="{% url 'farm_event' farm_group_id=farm_group.id farm_event_id=farm_event.id %}" method="POST">
+      <form action="{% url 'farm_event' farm_group_id=farm_group.id farm_event_id=farm_event.id %}" method="POST" class="post-form">
       {% else %}
-      <form action="{% url 'farm_event' farm_group_id=farm_group.id %}" method="POST">
+      <form action="{% url 'farm_event' farm_group_id=farm_group.id %}" method="POST" class="post-form">
       {% endif %}
 
       {% csrf_token %}
-      {{ form.as_table }}
 
+      {% for field in form %}
+      {% if field.is_hidden %}
+        {# Nothing to show for hidden fields #}
+        {{ field }}
+      {% else %}
+        <div class="form-group">
+          {{ field.label_tag }}{{ field }}
+
+          {# We could style the errors, but keeping it simple for now #}
+          {{ field.errors }}
+        </div>
+      {% endif %}
+      {% endfor %}
       <button type="submit">Submit</button>
       </form>
+      </div>
 
     </div>
   </div>

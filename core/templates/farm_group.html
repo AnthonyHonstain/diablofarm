@@ -14,12 +14,13 @@ Diablo Farming Tracker
   <div class="row">
     <div class="col-md-12 well">
       <h2>{{ farm_group.title }}</h2>
-      <p>Record your individual farming runs</p>
+      <p>Record of your last {{ farm_events|length}} individual farming runs - to access/export <a href="{% url 'farm_group_export' farm_group_id=farm_group.id %}">everything (slow)</a></p>
       {% if farm_events %}
       <ul class="list-unstyled">
 
       <li>
-        <table class="table">
+        <div class="table-responsive">
+        <table class="table table-bordered table-condensed">
          <tr>
           <th>Date</th>
           <th>Start</th>
@@ -52,6 +53,7 @@ Diablo Farming Tracker
          </tr>
         {% endfor %}
         </table>
+        </div>
       </li>
       </ul>
       {% endif %}

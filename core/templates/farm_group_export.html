@@ -1,0 +1,59 @@
+{% extends "diablofarm_base.html" %}
+
+{% block title %}
+DiabloFarm
+{% endblock %}
+
+{% block description %}
+Diablo Farming Tracker
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/bootstrap-table.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 well">
+      <h2>{{ farm_group.title }}</h2>
+      <p>Record of all your individual farming runs</p>
+
+      <table id="table" data-show-export="true">
+      </table>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/bootstrap-table.min.js"></script>
+<script src="/static/js/bootstrap-table-export.min.js"></script>
+<script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script src="/static/js/underscore.min.js"></script>
+<script>
+var tableData = {{ farm_events_json|safe }};
+var formatedTableData = [];
+
+$(function () {
+  _.each(tableData, function(row) {
+    formatedTableData.push({
+      "start_time": row.fields.start_time,
+      "end_time": row.fields.end_time,
+      "death_breath_count": row.fields.death_breath_count});
+  });
+
+  $('#table').bootstrapTable({
+    data: formatedTableData,
+    columns: [
+      {field: 'start_time', title: 'start_time'},
+      {field: 'end_time', title: 'end_time'},
+      {field: 'death_breath_count', title: 'death_breath_count'},
+    ]
+  });
+})
+</script>
+{% endblock %}
