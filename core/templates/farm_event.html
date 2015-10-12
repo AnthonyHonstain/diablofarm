@@ -43,7 +43,9 @@ Diablo Farming Tracker
         </div>
       {% endif %}
       {% endfor %}
-      <button type="submit">Submit</button>
+      <input type="button" value="Start time NOW" id="start-time-now" class="btn">
+      <input type="button" value="End time NOW" id="end-time-now" class="btn">
+      <button type="submit" class="btn btn-success">Submit</button>
       </form>
       </div>
 
@@ -59,8 +61,56 @@ Diablo Farming Tracker
 $('#datetimepicker_start').datetimepicker({
   todayBtn: true
 });
+
 $('#datetimepicker_end').datetimepicker({
   todayBtn: true
+});
+
+{# The follow stack links helped me get this rolling in a jiffy. #}
+{# http://stackoverflow.com/questions/10098038/how-can-i-insert-date-and-time-into-input-field-via-a-button-click #}
+{# http://stackoverflow.com/questions/10211145/getting-current-date-and-time-in-javascript #}
+
+function getCurrentDateTime() {
+  // Helper function to get us a datetime that plays nice with django.
+  // I am sure there is a cleaner way to do this.
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth()+1;
+  var day = now.getDate();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+
+  if(month.toString().length == 1) {
+    var month = '0'+month;
+  }
+  if(day.toString().length == 1) {
+    var day = '0'+day;
+  }
+  if(hour.toString().length == 1) {
+    var hour = '0'+hour;
+  }
+  if(minute.toString().length == 1) {
+    var minute = '0'+minute;
+  }
+  if(second.toString().length == 1) {
+    var second = '0'+second;
+  }
+  return year + "-" +
+    month + "-" +
+    day + " " +
+    hour + ":" +
+    minute + ":" +
+    second;
+}
+
+$(function(){
+  $('#start-time-now').click(function(){
+    $('#datetimepicker_start').val(getCurrentDateTime());
+  });
+  $('#end-time-now').click(function(){
+    $('#datetimepicker_end').val(getCurrentDateTime());
+  });
 });
 </script>
 {% endblock %}
